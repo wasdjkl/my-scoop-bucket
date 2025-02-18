@@ -18,16 +18,6 @@
         "arm64": {
             "url": "https://dldir1.qq.com/qqfile/qq/QQNT/Windows/QQ_9.9.17_250110_arm64_01.exe#/dl.7z",
             "hash": "eb7e6b803b2a1f5e1d1525ec6c52bb4c9df2d22da0f38bdf13599debc6d0c57f"
-        },
-
-        "installer": {
-            "script": [
-                "$configpath = \"$env:PUBLIC\\Documents\\Tencent\\QQ\"",
-                "if (!(Test-Path \"$configpath\")) {",
-                "    New-Item -Path \"$configpath\" -Type Directory -Force | Out-Null",
-                "}",
-                "Set-Content -NoNewline -Path \"$configpath\\UserDataInfo.ini\" -Value \"[UserDataSet]`nUserDataSavePathType=2`nUserDataSavePath=$persist_dir\\QQ Files\""
-            ]
         }
     },
     "shortcuts": [
@@ -38,6 +28,15 @@
     ],
     "extract_dir": "Files",
     "persist": "QQ Files",
+    "installer": {
+        "script": [
+            "$configpath = \"$env:PUBLIC\\Documents\\Tencent\\QQ\"",
+            "if (!(Test-Path \"$configpath\")) {",
+            "    New-Item -Path \"$configpath\" -Type Directory -Force | Out-Null",
+            "}",
+            "Set-Content -NoNewline -Path \"$configpath\\UserDataInfo.ini\" -Value \"[UserDataSet]`nUserDataSavePathType=2`nUserDataSavePath=$persist_dir\\QQ Files\""
+        ]
+    },
     "uninstaller": {
         "script": "Remove-Item -Path \"$env:PUBLIC\\Documents\\Tencent\" -Recurse -Force | Out-Null"
     },
